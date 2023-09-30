@@ -1,75 +1,51 @@
 import './App.css';
-import React, {useEffect, useId, useState} from "react";
-import {Counter} from "./components/counter";
+import React, {useEffect} from "react";
+import {Navigate, NavLink, Route, Routes, useLocation} from "react-router-dom";
+import {routerLinks} from "./router/router";
+import {Home} from "./pages/home";
+import {Contact} from "./pages/contact";
+import {About} from "./pages/about";
+import {ErrorNotFound} from "./pages/error";
+import {BoxDetails} from "./pages/box-details";
 
 function App() {
-    const [counter, setCounter] = useState(0)
-    let x = useId()
-    console.log('11111111111111111111111111111')
-    const [hideButton, setHideButton] = useState(false)
-
-    let intervalData = null
-
+    const location = useLocation()
 
     useEffect(() => {
-        console.log(x, 'state 1')
-        console.log('222222222222222222222222222')
-    }, [])
-
-    const handleCounter = () => {
-        setCounter(counter + 1)
-        console.log(counter, 'counter')
-    }
-
-
-    useEffect(() => {
-        console.log(counter, 'counter useEffect')
-        console.log('55555555555555555555555')
-
-    }, [counter])
-
-    console.log('3333333333333333333333333333333333')
-
-
-    useEffect(() => {
-
-
-        return () => {
-
-        }
-
-    }, []);
-
+        window.scrollTo(0, 0)
+    }, [location.pathname]);
 
     return <div>
-        {console.log('44444444444444444444444444')}
-        <button onClick={handleCounter}>click me</button>
-        <button onClick={()=>setHideButton(!hideButton)}>hide button</button>
-        <h1>{counter}</h1>
+        <header>
+            <ul>
+                <li>
+                    <NavLink to={routerLinks.HOME}
+                             className={({isActive, isPending}) => isActive ? "active" : ""}>Home</NavLink>
+                </li>
+                <li>
+                    <NavLink to={routerLinks.ABOUT}
+                             className={({isActive, isPending}) => isActive ? "active" : ""}>About</NavLink>
+                </li>
+                <li>
+                    <NavLink to={routerLinks.CONTACT}
+                             className={({isActive, isPending}) => isActive ? "active" : ""}>Contact</NavLink>
+                </li>
+            </ul>
+        </header>
 
-        {!hideButton ? <Counter/> : null}
+        <Routes>
+            <Route path={routerLinks.HOME} element={<Home/>}></Route>
+            <Route path={routerLinks.CONTACT} element={<Contact/>}/>
+            <Route path={routerLinks.ABOUT} element={<About/>}/>
+            <Route path={routerLinks.BOX_DETAILS} element={<BoxDetails/>}/>
+            <Route path={routerLinks.ERROR} element={<ErrorNotFound/>}/>
+
+
+            <Route path={'/*'} element={<Navigate to={routerLinks.ERROR}/>}></Route>
+        </Routes>
+        {/*<LocalStorageTest/>*/}
+
     </div>
 }
 
 export default App
-
-
-// class App extends React.Component {
-//     componentDidMount() {
-//         {console.log('asdfasdfasdfasdf')}
-//
-//     }
-//     componentDidUpdate(prevProps, prevState, snapshot) {
-//
-//     }
-//
-//     componentWillUnmount() {
-//
-//     }
-//
-//     render() {
-//         return <div>ASDFASD  </div>
-//     }
-// }
-//
-// export default App
