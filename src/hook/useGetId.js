@@ -1,0 +1,4 @@
+export function useGetId (){
+
+    return {}
+}
