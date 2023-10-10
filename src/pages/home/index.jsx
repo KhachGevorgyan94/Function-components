@@ -1,40 +1,27 @@
-import useWindowSize, {useInput} from "../../hook/useWindowSize";
-import {useCounter} from "../../hook/useCounter";
-import {useEffect, useRef, useState} from "react";
-import {Slider, SliderCustom} from "../../components/slider";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
 
 export const Home = () => {
 
-    const {counter, decrementCounter, incrementCounter} = useCounter()
-    // const  = useRef();
+    const firstName = useSelector(state => state.firstName)
+    const lastName = useSelector(state => state.lastName)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        console.log(firstName)
+    }, []);
 
-    const infoRef = useRef(null)
 
-    const [showInfo, setShowInfo] = useState(false)
-
-
-    const handleChange = () => {
-        setShowInfo(!showInfo)
-        console.log(infoRef)
-        if (infoRef.current) {
-            console.log(infoRef.current.getBoundingClientRect())
-        }
+    const handleCLick = () => {
+        dispatch({type: "SET_MY_NAME", payload: 'Gevorgyan'})
     }
-    return <div className={'P-info-block'}>
-        <SliderCustom />
-        {/*<SliderCustom customSettings={{slidesToShow:1}} />*/}
-        {/*<h1>{counter}</h1>*/}
-        {/*<button onClick={incrementCounter}>increment</button>*/}
-        {/*<button onClick={decrementCounter}>decrement</button>*/}
-        {/*<button onClick={handleChange}>click me</button>*/}
-        {/*{showInfo ?*/}
-        {/*    <p ref={infoRef}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto asperiores*/}
-        {/*        aspernatur autem*/}
-        {/*        beatae*/}
-        {/*        commodi deserunt dicta dignissimos dolores doloribus eius fugiat, ipsa natus nostrum odio optio*/}
-        {/*        perspiciatis*/}
-        {/*        quasi, sit.</p> :*/}
-        {/*    null  }*/}
 
+
+    return <div className={'P-info-block'}>
+        Home {firstName}
+        <br/>
+        {lastName ? <p>{lastName}</p> : '-'}
+        <br/>
+
+        <button onClick={handleCLick}>Click me</button>
     </div>
 }
