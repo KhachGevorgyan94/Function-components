@@ -1,24 +1,27 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
 import usersSlice, {changeAge, changeName} from "../../store/reducers/usersSlice";
+import {UserContext, useUserContext} from "../../context/user-context";
 
 export const Home = () => {
 
     const firstName = useSelector(state => state.firstName)
     const lastName = useSelector(state => state.usersReducer.lastName)
 
+    const userData = useUserContext()
+
     const userInfo = useSelector(state=>state.usersSlice.userInfo)
-
-
     const dispatch = useDispatch()
     // useEffect(() => {
     //     console.log(firstName)
     // }, []);
 
+    console.log(userData)
     // console.log(lastName)
 
     const handleCLick = () => {
         dispatch({type: "SET_MY_NAME", payload: 'Gevorgyan'})
+        userData.setUserData('Gevorgyan')
     }
 
     const changeMyName = ()=>{

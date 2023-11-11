@@ -5,10 +5,10 @@ import React from "react";
 export function AuthComponents() {
 
     const userData = {
-        permissions: ['getHome', 'SetHome']
+        permissions: ['getHome', 'SetHome', 'getAbout', 'SetAbout', 'DeleteAbout']
     }
     return <div>
-        <div className={'side-bar'}>
+        <div className={'side-bar'} style={{backgroundImage:`url('${''}')`}}>
             <ul>
                 {authList.length ? authList.map((item, index) => {
                     return userData.permissions.some((x) => item.permissions.includes(x)) &&
