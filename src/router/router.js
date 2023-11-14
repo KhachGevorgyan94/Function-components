@@ -6,7 +6,6 @@ export const routerLinks = {
     ABOUT: '/about',
 }
 
-
 export const authList = [
     {
         path: routerLinks.HOME,

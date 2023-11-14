@@ -30,7 +30,7 @@ export const AboutUs = () => {
             {/*    /!*    return <li key={index}>{index+1}. {item.name}  <button onClick={()=>deleteProduct(index)}>Delete</button></li>*!/*/}
             {/*    /!*})}*!/*/}
             {/*</ul>: <p>empty product list</p>}*/}
-            <h1>{userData.user}</h1>
+            <h1>{userData.user.email}</h1>
         </div>
 
     </div>
